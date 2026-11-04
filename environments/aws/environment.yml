@@ -1,0 +1,12 @@
+# Bedrock mode (RAG_PIPELINE=verified-bedrock) with your own AWS credentials; same packages as the production image.
+# From the repository root: conda env create -f environments/aws/environment.yml
+# Python packages are pinned only in requirements-aws.lock; Conda resolves the -r path relative to this file.
+name: drugcentral-rag-aws
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - -r requirements-aws.lock

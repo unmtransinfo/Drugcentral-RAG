@@ -1,0 +1,12 @@
+# Local mode (RAG_PIPELINE=local): Ollama models + local pgvector. No AWS packages.
+# From the repository root: conda env create -f environments/local/environment.yml
+# Python packages are pinned only in requirements-local.lock; Conda resolves the -r path relative to this file.
+name: drugcentral-rag-local
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - -r requirements-local.lock
