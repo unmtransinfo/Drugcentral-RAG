@@ -1,0 +1,12 @@
+# Local mode (RAG_PIPELINE=local): FastAPI API + Ollama models + local pgvector. No AWS packages.
+# Pinned versions: requirements-local.lock (shared packages match ../aws/requirements-aws.lock).
+langchain-core>=1.4,<2
+langchain-ollama>=1,<2
+psycopg2-binary>=2.9.9,<3
+fastapi>=0.136,<1
+uvicorn>=0.30,<1
+pydantic>=2.7,<3
+httpx>=0.28,<1
+requests>=2.32,<3
+python-dotenv>=1,<2
+pandas>=2.2,<3

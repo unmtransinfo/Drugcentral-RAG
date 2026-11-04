@@ -1,0 +1,54 @@
+# Developer services for running the API on your own machine (both RAG_PIPELINE modes).
+# Everything binds to 127.0.0.1 and uses local Docker volumes; nothing connects to a hosted deployment.
+#
+# From the repository root, after `cp environments/local/<mode>.env.example .env` and editing .env:
+#   docker compose -f environments/local/docker-compose.yml --env-file .env up -d db             # pgvector
+#   docker compose -f environments/local/docker-compose.yml --env-file .env --profile ollama up -d ollama   # optional
+#   docker compose -f environments/local/docker-compose.yml --env-file .env --profile source up -d source-db
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: drugcentral_rag
+      POSTGRES_USER: ${PGUSER:-rag_local}
+      POSTGRES_PASSWORD: ${PGPASSWORD:?set PGPASSWORD in .env}
+    volumes:
+      - localpgdata:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/10-vector.sql:ro
+    ports:
+      - "127.0.0.1:${PGPORT:-55432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d drugcentral_rag"]
+      interval: 10s
+      retries: 6
+
+  # Optional: use this if Ollama is not installed natively (then pull models with
+  # `docker compose ... exec ollama ollama pull <model>`). GPU passthrough is not configured here.
+  # Pinned to the image available when this was written (multi-platform index: linux/amd64, linux/arm64);
+  # it reports Ollama 0.40.14. Tested on arm64 only: docs/LOCAL_INTEGRATION_TEST.md.
+  ollama:
+    profiles: ["ollama"]
+    image: ollama/ollama@sha256:ebaef4f4c5d93660e1f25f8ad085a112f51ccfb0e8458073e71793959dba91c9
+    volumes:
+      - ollamamodels:/root/.ollama
+    ports:
+      - "127.0.0.1:11434:11434"
+
+  # Optional, for ingestion only: the public DrugCentral source database image (amd64; on ARM machines build
+  # environments/ec2/source-db.Dockerfile and restore a DrugCentral dump instead, see docs/LOCAL_DEVELOPMENT.md).
+  source-db:
+    profiles: ["source"]
+    image: ${SOURCE_DB_IMAGE:-unmtransinfo/drugcen-2027-db:latest}
+    platform: ${SOURCE_DB_PLATFORM:-linux/amd64}
+    shm_size: 1g
+    environment:
+      POSTGRES_PASSWORD: ${SOURCE_DB_PASSWORD:?set SOURCE_DB_PASSWORD in .env}
+    volumes:
+      - localsourcedata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${SOURCE_DB_PORT:-55433}:5432"
+
+volumes:
+  localpgdata:
+  ollamamodels:
+  localsourcedata:
