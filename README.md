@@ -28,12 +28,28 @@ Cloning this repository gives you no credentials, tokens, database access or acc
 account. Local mode makes no AWS calls; Bedrock mode uses only the credentials of your own environment. The CLI and
 evaluation tools default to `http://127.0.0.1:8000`; no setting defaults to a hosted API.
 
+## Prerequisites
+
+Clone the repository and run these commands from its root.
+
+1. [Install Conda](https://www.anaconda.com/docs/getting-started/miniconda/install).
+2. Create the environment:
+   - Local models: `conda env create -f environments/local/environment.yml`
+   - AWS Bedrock: `conda env create -f environments/aws/environment.yml`
+3. Activate the environment:
+   - Local models: `conda activate drugcentral-rag-local`
+   - AWS Bedrock: `conda activate drugcentral-rag-aws`
+4. Follow the documented model, database, and configuration setup for your selected mode.
+
+Each environment file installs Python 3.11 from conda-forge and then the pinned packages of its lock file
+(`requirements-local.lock` or `requirements-aws.lock`, next to the environment file). Docker workflows install the same
+lock files without Conda. Validation and limitations: [docs/LOCAL_DEVELOPMENT.md](docs/LOCAL_DEVELOPMENT.md#prerequisites).
+
 ## Quick start (your own instance)
 
+With the environment active:
+
 ```bash
-python3.11 -m venv .venv && . .venv/bin/activate
-pip install -r environments/local/requirements-local.lock     # local mode (Ollama)
-# or: pip install -r environments/aws/requirements-aws.lock   # Bedrock mode
 cp environments/local/ollama.env.example .env                 # or bedrock.env.example; edit the passwords
 docker compose -f environments/local/docker-compose.yml --env-file .env up -d db
 ```
@@ -87,8 +103,8 @@ The default URL is http://127.0.0.1:8000 (or `DRUGCENTRAL_API_URL`). Exit status
 | `cli/ask.py` | Developer CLI for any running API (standard library only) |
 | `ingestion/` | Builders for vector/evidence collections, Neo4j graph, label and relation SQLite files |
 | `evaluation/` | Benchmark builders, runners and the Nova Lite judge (datasets not included; `evaluation/DATASETS.md`) |
-| `environments/local/` | Developer Compose file (pgvector, optional Ollama and source DB), env examples, local dependency lock |
-| `environments/aws/` | Bedrock-mode dependency spec and lock (also used by the production image) |
+| `environments/local/` | Developer Compose file (pgvector, optional Ollama and source DB), env examples, local-mode Conda environment and dependency lock |
+| `environments/aws/` | Bedrock-mode Conda environment, dependency spec and lock (the lock is also used by the production image) |
 | `environments/prod/` | Production API `Dockerfile`, non-secret Bedrock settings, alert script |
 | `environments/ec2/` | Production Compose file, runbook, restore/bundle/collection scripts, IAM policy, examples |
 | `docs/` | Local development, local integration test record, AWS deployment, API reference, architecture, full-coverage runbook, source map |
@@ -97,7 +113,7 @@ The default URL is http://127.0.0.1:8000 (or `DRUGCENTRAL_API_URL`). Exit status
 ## Tests
 
 ```bash
-python -m unittest discover -s tests -t .     # in each virtual environment; no network, AWS or database needed
+python -m unittest discover -s tests -t .     # in each Conda environment; no network, AWS or database needed
 ```
 
 Run it once per dependency group: tests that need only the other group's packages are skipped. The Bedrock request

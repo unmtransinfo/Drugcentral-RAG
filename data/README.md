@@ -12,7 +12,7 @@ Not tracked in Git. The production image build needs `data/labels.sqlite`; the b
 `dataset_version` `drugcentral-56-2026-09-02`). Obtain it from DrugCentral (https://drugcentral.org) under
 DrugCentral's own terms; this repository does not redistribute DrugCentral data or anything derived from it.
 
-Run the commands from the repository root in either virtual environment (docs/LOCAL_DEVELOPMENT.md). Both tools
+Run the commands from the repository root in either Conda environment (docs/LOCAL_DEVELOPMENT.md). Both tools
 build a temporary file, check it with `PRAGMA integrity_check`, and replace the output atomically.
 
 The vector collections (pgvector), the Neo4j graph and the restore bundle are not files in this folder; see

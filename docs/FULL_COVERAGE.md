@@ -46,7 +46,7 @@ Previews already exist in `benchmarks/full-coverage/`. To regenerate them, both 
 cd /path/to/Drugcentral-RAG-EC2      # this repository, on the machine with the source database
 export SOURCE_DATABASE_URL=postgresql://postgres:<source-db-password>@127.0.0.1:5435/drugcen DATASET_VERSION=drugcentral-56-2026-09-02
 set -a; . environments/prod/bedrock-production.env; set +a; export AWS_REGION=us-east-2
-PY=python      # Python 3.11 with environments/aws/requirements-aws.lock installed
+PY=python      # with the drugcentral-rag-aws Conda environment active (environments/aws/environment.yml)
 INGEST_PREVIEW_ONLY=1 INGEST_PREVIEW_PATH=benchmarks/full-coverage/base-preview.jsonl $PY -m ingestion.vectors      # no Bedrock calls
 $PY -m ingestion.full_coverage preview --output benchmarks/full-coverage/extra-preview.jsonl                          # prints the cost
 ```
