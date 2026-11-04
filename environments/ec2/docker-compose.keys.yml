@@ -1,0 +1,15 @@
+# OPTIONAL: use IAM user access keys instead of an EC2 instance role.
+# Less safe: long-lived keys sit in environments/ec2/.env on the instance. Prefer the instance role when you can.
+# Use by adding "-f environments/ec2/docker-compose.keys.yml" after the main compose file, e.g.
+#   docker compose -f environments/ec2/docker-compose.yml -f environments/ec2/docker-compose.keys.yml \
+#       --env-file environments/ec2/.env up -d --build api
+# and set AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY in environments/ec2/.env (chmod 600).
+services:
+  api:
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:?set AWS_ACCESS_KEY_ID in environments/ec2/.env}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:?set AWS_SECRET_ACCESS_KEY in environments/ec2/.env}
+  tools:
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:?set AWS_ACCESS_KEY_ID in environments/ec2/.env}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:?set AWS_SECRET_ACCESS_KEY in environments/ec2/.env}

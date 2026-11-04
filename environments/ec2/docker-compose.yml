@@ -1,0 +1,131 @@
+# Single-host deployment: API + pgvector (+ optional Neo4j graph, + optional full source DB) on one EC2 instance.
+# Bedrock is the only other AWS service; credentials come from the instance role.
+#
+# Run from the repository root:
+#   docker compose -f environments/ec2/docker-compose.yml --env-file environments/ec2/.env up -d --build           # api + db
+#   ... --profile graph up -d                                                                                       # add Neo4j
+#   ... --profile source up -d source-db                                                                            # full source DB (rebuilds only)
+#   ... --profile tools run --rm tools python -m ingestion.graph_build --rebuild                                    # one-off jobs
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD:?set in environments/ec2/.env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${DB_PORT:-5432}:5432"   # host-local only (restore/maintenance)
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 6
+
+  api:
+    image: drugcentral-rag-api:local
+    build:
+      context: ../..
+      dockerfile: environments/prod/Dockerfile
+      target: bedrock
+    restart: unless-stopped
+    depends_on:
+      db: {condition: service_healthy}
+    env_file:
+      - ../prod/bedrock-production.env
+      # Optional: selects a different vector/structured collection (written by import_collection.sh).
+      # Delete the file to return to the collection named in bedrock-production.env.
+      - path: collection.env
+        required: false
+    environment:
+      AWS_REGION: ${AWS_REGION:-us-east-2}
+      PGHOST: db
+      PGPORT: "5432"
+      PGDATABASE: drugcentral_rag
+      PGUSER: rag_api
+      PGPASSWORD: ${RAG_API_PASSWORD:?set in environments/ec2/.env}
+      PGSSLMODE: disable            # same-host Docker network
+      SESSION_BACKEND: memory
+      EVIDENCE_AUDIT_PATH: /app/logs/evidence-audit.jsonl
+      API_AUTH_TOKEN: ${API_AUTH_TOKEN:?set in environments/ec2/.env}
+      RAG_MULTIPART: ${RAG_MULTIPART:-1}
+      GRAPH_ENABLED: ${GRAPH_ENABLED:-0}   # 1 only after the graph is loaded and `--profile graph` is up
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD:-unused-until-graph-enabled}
+    volumes:
+      - auditlogs:/app/logs      # named volume inherits the image's app-owned directory
+    ports:
+      - "${API_BIND:-127.0.0.1}:${API_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 120s
+
+  neo4j:
+    profiles: ["graph"]
+    image: neo4j:5-community
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: neo4j/${NEO4J_PASSWORD:-}   # empty => Neo4j refuses to start; set it before using the graph profile
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1g
+      NEO4J_server_memory_pagecache_size: 512m
+    volumes:
+      - neo4jdata:/data
+    ports:
+      - "127.0.0.1:${NEO4J_PORT:-7687}:7687"
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p \"$${NEO4J_AUTH#neo4j/}\" 'RETURN 1' >/dev/null 2>&1"]
+      interval: 15s
+      retries: 10
+
+  # Full DrugCentral source (authoritative). Needed only to rebuild vectors/graph or re-run the inventory,
+  # not to answer questions. amd64 image on x86 hosts; on ARM (Graviton) build environments/ec2/source-db.Dockerfile
+  # and set SOURCE_DB_IMAGE/SOURCE_DB_PLATFORM, then restore the archive with environments/ec2/restore_source.sh.
+  source-db:
+    profiles: ["source"]
+    image: ${SOURCE_DB_IMAGE:-unmtransinfo/drugcen-2027-db:latest}
+    platform: ${SOURCE_DB_PLATFORM:-linux/amd64}
+    restart: unless-stopped
+    shm_size: 1g
+    environment:
+      POSTGRES_PASSWORD: ${SOURCE_DB_PASSWORD:-}   # empty => postgres refuses to start; set it before using the source profile
+    volumes:
+      - sourcepgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${SOURCE_DB_PORT:-5433}:5432"
+
+  # One-off jobs (full-coverage build, graph build, inventory, benchmark) using the API image.
+  # Writes use the ingestion role (rag_ingest); the API itself keeps its read-only role.
+  tools:
+    profiles: ["tools"]
+    image: drugcentral-rag-api:local
+    user: "0:0"
+    env_file:
+      - ../prod/bedrock-production.env
+    environment:
+      AWS_REGION: ${AWS_REGION:-us-east-2}
+      PGHOST: db
+      PGPORT: "5432"
+      PGDATABASE: drugcentral_rag
+      PGUSER: rag_ingest
+      PGPASSWORD: ${RAG_INGEST_PASSWORD:?set RAG_INGEST_PASSWORD in environments/ec2/.env}
+      PGSSLMODE: disable
+      SOURCE_DATABASE_URL: postgresql://postgres:${SOURCE_DB_PASSWORD:-unset}@source-db:5432/${SOURCE_DB_NAME:-drugcentral}
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD:-unset}
+    volumes:
+      - ../../docs:/app/docs
+      - ../../evaluation:/app/evaluation
+      - ../../benchmarks:/app/benchmarks
+    working_dir: /app
+    depends_on:
+      db: {condition: service_healthy}
+
+volumes:
+  auditlogs:
+  pgdata:
+  neo4jdata:
+  sourcepgdata:
