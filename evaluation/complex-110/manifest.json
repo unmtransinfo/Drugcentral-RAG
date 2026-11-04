@@ -1,0 +1,18 @@
+{
+  "seed": 20261004,
+  "dataset_version": "drugcentral-56-2026-09-02",
+  "composition": {
+    "independent_2part": 20,
+    "independent_3part": 15,
+    "multi_drug_comparison": 15,
+    "cross_section": 15,
+    "true_multi_hop": 15,
+    "long_label": 10,
+    "partially_answerable": 10,
+    "completely_unanswerable": 10
+  },
+  "total": 110,
+  "questions_sha256": "92f72549638b4bb396687ea504e3698cacfd155b643187a54613753bf60d459c",
+  "status": "UNREVIEWED: gold facts come from source tables; an independent reviewer must approve before use",
+  "gold": "component reference_facts are exact source values; multi-hop reference_set is computed by direct SQL"
+}
