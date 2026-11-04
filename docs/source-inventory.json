@@ -1,0 +1,4215 @@
+{
+  "act_table_full": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "act_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "target_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "target_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "target_class",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "accession",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "gene",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "swissprot",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "act_value",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "act_unit",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "act_type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "act_comment",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "act_source",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "relation",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "moa",
+        "nullable": true,
+        "type": "smallint"
+      },
+      {
+        "name": "moa_source",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "act_source_url",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "moa_source_url",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "action_type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "first_in_class",
+        "nullable": true,
+        "type": "smallint"
+      },
+      {
+        "name": "tdl",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "act_ref_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "moa_ref_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "organism",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence",
+      "relations_sqlite"
+    ],
+    "estimated_rows": 22364,
+    "foreign_keys": [
+      {
+        "columns": [
+          "action_type"
+        ],
+        "referenced_columns": [
+          "action_type"
+        ],
+        "references": "action_type"
+      },
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      },
+      {
+        "columns": [
+          "target_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "target_dictionary"
+      },
+      {
+        "columns": [
+          "act_ref_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "reference"
+      },
+      {
+        "columns": [
+          "moa_ref_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "reference"
+      },
+      {
+        "columns": [
+          "target_class"
+        ],
+        "referenced_columns": [
+          "l1"
+        ],
+        "references": "target_class"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "act_id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 22364
+  },
+  "action_type": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "action_type",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "description",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "parent_type",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 34,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 34
+  },
+  "active_ingredient": {
+    "category": "products_labels",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "active_moiety_unii",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "active_moiety_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "unit",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "quantity",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "substance_unii",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "substance_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "ndc_product_code",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "quantity_denom_unit",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "quantity_denom_value",
+        "nullable": true,
+        "type": "double precision"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence",
+      "label_database"
+    ],
+    "estimated_rows": 210500,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      },
+      {
+        "columns": [
+          "ndc_product_code"
+        ],
+        "referenced_columns": [
+          "ndc_product_code"
+        ],
+        "references": "product"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Section-aware hybrid RAG for long label text; direct lookup for product identity",
+    "rows": 210500
+  },
+  "approval": {
+    "category": "regulatory",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "approval",
+        "nullable": true,
+        "type": "date"
+      },
+      {
+        "name": "type",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "applicant",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "orphan",
+        "nullable": true,
+        "type": "boolean"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 4128,
+    "foreign_keys": [
+      {
+        "columns": [
+          "type"
+        ],
+        "referenced_columns": [
+          "descr"
+        ],
+        "references": "approval_type"
+      },
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding; Neo4j projection (Drug-HAS_APPROVAL)",
+    "rows": 4128
+  },
+  "approval_type": {
+    "category": "regulatory",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "descr",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 10,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding; Neo4j projection (Drug-HAS_APPROVAL)",
+    "rows": 10
+  },
+  "atc": {
+    "category": "atc_ddd",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "code",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "chemical_substance",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "l1_code",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "l1_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "l2_code",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "l2_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "l3_code",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "l3_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "l4_code",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "l4_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "chemical_substance_count",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 5678,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup; Neo4j projection (Drug-HAS_ATC-ATC)",
+    "rows": 5678
+  },
+  "atc_ddd": {
+    "category": "atc_ddd",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "atc_code",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "ddd",
+        "nullable": false,
+        "type": "real"
+      },
+      {
+        "name": "unit_type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "route",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "comment",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 2705,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup; Neo4j projection (Drug-HAS_ATC-ATC)",
+    "rows": 2705
+  },
+  "attr_type": {
+    "category": "provenance",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "type",
+        "nullable": false,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 4,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding",
+    "rows": 4
+  },
+  "data_source": {
+    "category": "provenance",
+    "columns": [
+      {
+        "name": "src_id",
+        "nullable": false,
+        "type": "smallint"
+      },
+      {
+        "name": "source_name",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 13,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "src_id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding",
+    "rows": 13
+  },
+  "dbversion": {
+    "category": "provenance",
+    "columns": [
+      {
+        "name": "version",
+        "nullable": false,
+        "type": "bigint"
+      },
+      {
+        "name": "dtime",
+        "nullable": false,
+        "type": "timestamp without time zone"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 1,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "version"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding",
+    "rows": 1
+  },
+  "ddi": {
+    "category": "interactions",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "drug_class1",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "drug_class2",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "ddi_ref_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "ddi_risk",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "description",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "source_id",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 7621,
+    "foreign_keys": [
+      {
+        "columns": [
+          "ddi_risk",
+          "ddi_ref_id"
+        ],
+        "referenced_columns": [
+          "risk",
+          "ddi_ref_id"
+        ],
+        "references": "ddi_risk"
+      },
+      {
+        "columns": [
+          "drug_class1"
+        ],
+        "referenced_columns": [
+          "name"
+        ],
+        "references": "drug_class"
+      },
+      {
+        "columns": [
+          "drug_class2"
+        ],
+        "referenced_columns": [
+          "name"
+        ],
+        "references": "drug_class"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (DrugClass-INTERACTS_WITH-DrugClass)",
+    "rows": 7621
+  },
+  "ddi_risk": {
+    "category": "interactions",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "risk",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "ddi_ref_id",
+        "nullable": false,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 6,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (DrugClass-INTERACTS_WITH-DrugClass)",
+    "rows": 6
+  },
+  "doid": {
+    "category": "indications",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "label",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "doid",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "url",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 10040,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query / hybrid RAG; Neo4j projection (Drug-INDICATED_FOR-Disease)",
+    "rows": 10040
+  },
+  "doid_xref": {
+    "category": "indications",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "doid",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "source",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "xref",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 34645,
+    "foreign_keys": [
+      {
+        "columns": [
+          "doid"
+        ],
+        "referenced_columns": [
+          "doid"
+        ],
+        "references": "doid"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query / hybrid RAG; Neo4j projection (Drug-INDICATED_FOR-Disease)",
+    "rows": 34645
+  },
+  "drug_class": {
+    "category": "interactions",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "is_group",
+        "nullable": false,
+        "type": "smallint"
+      },
+      {
+        "name": "source",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 3855,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (DrugClass-INTERACTS_WITH-DrugClass)",
+    "rows": 3855
+  },
+  "faers": {
+    "category": "adverse_events",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "meddra_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "meddra_code",
+        "nullable": false,
+        "type": "bigint"
+      },
+      {
+        "name": "level",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "llr",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "llr_threshold",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "drug_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "drug_no_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "no_drug_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "no_drug_no_ae",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 473349,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Hybrid RAG with FAERS caveat; direct PostgreSQL for exact counts",
+    "rows": 473349
+  },
+  "faers_female": {
+    "category": "adverse_events",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "meddra_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "meddra_code",
+        "nullable": false,
+        "type": "bigint"
+      },
+      {
+        "name": "level",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "llr",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "llr_threshold",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "drug_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "drug_no_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "no_drug_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "no_drug_no_ae",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 300894,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Hybrid RAG with FAERS caveat; direct PostgreSQL for exact counts",
+    "rows": 300894
+  },
+  "faers_ger": {
+    "category": "adverse_events",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "meddra_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "meddra_code",
+        "nullable": false,
+        "type": "bigint"
+      },
+      {
+        "name": "level",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "llr",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "llr_threshold",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "drug_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "drug_no_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "no_drug_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "no_drug_no_ae",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 370533,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [],
+    "retrieval": "Hybrid RAG with FAERS caveat; direct PostgreSQL for exact counts",
+    "rows": 370533
+  },
+  "faers_male": {
+    "category": "adverse_events",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "meddra_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "meddra_code",
+        "nullable": false,
+        "type": "bigint"
+      },
+      {
+        "name": "level",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "llr",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "llr_threshold",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "drug_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "drug_no_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "no_drug_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "no_drug_no_ae",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 180154,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Hybrid RAG with FAERS caveat; direct PostgreSQL for exact counts",
+    "rows": 180154
+  },
+  "faers_ped": {
+    "category": "adverse_events",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "meddra_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "meddra_code",
+        "nullable": false,
+        "type": "bigint"
+      },
+      {
+        "name": "level",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "llr",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "llr_threshold",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "drug_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "drug_no_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "no_drug_ae",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "no_drug_no_ae",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 250,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [],
+    "retrieval": "Hybrid RAG with FAERS caveat; direct PostgreSQL for exact counts",
+    "rows": 250
+  },
+  "faers_top": {
+    "category": "adverse_events",
+    "columns": [
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "meddra_name",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 0,
+    "foreign_keys": [],
+    "kind": "view",
+    "links_to_drug": true,
+    "primary_key": [],
+    "retrieval": "Hybrid RAG with FAERS caveat; direct PostgreSQL for exact counts",
+    "rows": 44760
+  },
+  "humanim": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "human",
+        "nullable": true,
+        "type": "boolean"
+      },
+      {
+        "name": "animal",
+        "nullable": true,
+        "type": "boolean"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 400,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 400
+  },
+  "id_type": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "type",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "description",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "url",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 22,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 22
+  },
+  "identifier": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "identifier",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "id_type",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "parent_match",
+        "nullable": true,
+        "type": "boolean"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 87135,
+    "foreign_keys": [
+      {
+        "columns": [
+          "id_type"
+        ],
+        "referenced_columns": [
+          "type"
+        ],
+        "references": "id_type"
+      },
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 87135
+  },
+  "ijc_connect_items": {
+    "category": "products_labels",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "username",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "type",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "data",
+        "nullable": true,
+        "type": "text"
+      }
+    ],
+    "derived_into": [
+      "unrepresented"
+    ],
+    "estimated_rows": 0,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Section-aware hybrid RAG for long label text; direct lookup for product identity",
+    "rows": 0
+  },
+  "ijc_connect_structures": {
+    "category": "products_labels",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "structure_hash",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "structure",
+        "nullable": true,
+        "type": "text"
+      }
+    ],
+    "derived_into": [
+      "unrepresented"
+    ],
+    "estimated_rows": 0,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id",
+      "structure_hash"
+    ],
+    "retrieval": "Section-aware hybrid RAG for long label text; direct lookup for product identity",
+    "rows": 0
+  },
+  "inn_stem": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "stem",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "definition",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "national_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "length",
+        "nullable": true,
+        "type": "smallint"
+      },
+      {
+        "name": "discontinued",
+        "nullable": true,
+        "type": "boolean"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 667,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 667
+  },
+  "inxight_drugs": {
+    "category": "provenance",
+    "columns": [
+      {
+        "name": "dc_struct_id",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "dc_xref_unii",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "dc_dc_struct_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "inx_unii",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "inx_drug_name",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 1897,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding",
+    "rows": 1897
+  },
+  "label": {
+    "category": "products_labels",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "category",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "title",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "effective_date",
+        "nullable": true,
+        "type": "date"
+      },
+      {
+        "name": "assigned_entity",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "pdf_url",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "label_database"
+    ],
+    "estimated_rows": 123449,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Section-aware hybrid RAG for long label text; direct lookup for product identity",
+    "rows": 123449
+  },
+  "lincs_signature": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id1",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id2",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "is_parent1",
+        "nullable": true,
+        "type": "boolean"
+      },
+      {
+        "name": "is_parent2",
+        "nullable": true,
+        "type": "boolean"
+      },
+      {
+        "name": "cell_id",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "rmsd",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "rmsd_norm",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "pearson",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "euclid",
+        "nullable": true,
+        "type": "double precision"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 8757973,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 8757622
+  },
+  "ob_exclusivity": {
+    "category": "regulatory",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "appl_type",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "appl_no",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "product_no",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "exclusivity_code",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "exclusivity_date",
+        "nullable": true,
+        "type": "date"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 2252,
+    "foreign_keys": [
+      {
+        "columns": [
+          "exclusivity_code"
+        ],
+        "referenced_columns": [
+          "code"
+        ],
+        "references": "ob_exclusivity_code"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding; Neo4j projection (Drug-HAS_APPROVAL)",
+    "rows": 2252
+  },
+  "ob_exclusivity_code": {
+    "category": "regulatory",
+    "columns": [
+      {
+        "name": "code",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "description",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 2087,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "code"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding; Neo4j projection (Drug-HAS_APPROVAL)",
+    "rows": 2087
+  },
+  "ob_exclusivity_view": {
+    "category": "regulatory",
+    "columns": [
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "strength",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "trade_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "applicant",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "appl_type",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "appl_no",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "approval_date",
+        "nullable": true,
+        "type": "date"
+      },
+      {
+        "name": "type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "dose_form",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "route",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "exclusivity_date",
+        "nullable": true,
+        "type": "date"
+      },
+      {
+        "name": "description",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 0,
+    "foreign_keys": [],
+    "kind": "view",
+    "links_to_drug": true,
+    "primary_key": [],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding; Neo4j projection (Drug-HAS_APPROVAL)",
+    "rows": 2499
+  },
+  "ob_patent": {
+    "category": "regulatory",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "appl_type",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "appl_no",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "product_no",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "patent_no",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "patent_expire_date",
+        "nullable": true,
+        "type": "date"
+      },
+      {
+        "name": "drug_substance_flag",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "drug_product_flag",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "patent_use_code",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "delist_flag",
+        "nullable": true,
+        "type": "character"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 21466,
+    "foreign_keys": [
+      {
+        "columns": [
+          "patent_use_code"
+        ],
+        "referenced_columns": [
+          "code"
+        ],
+        "references": "ob_patent_use_code"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding; Neo4j projection (Drug-HAS_APPROVAL)",
+    "rows": 21466
+  },
+  "ob_patent_use_code": {
+    "category": "regulatory",
+    "columns": [
+      {
+        "name": "code",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "description",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 4575,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "code"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding; Neo4j projection (Drug-HAS_APPROVAL)",
+    "rows": 4575
+  },
+  "ob_patent_view": {
+    "category": "regulatory",
+    "columns": [
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "strength",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "patent_no",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "description",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "trade_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "applicant",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "appl_type",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "appl_no",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "dose_form",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "route",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "approval_date",
+        "nullable": true,
+        "type": "date"
+      },
+      {
+        "name": "patent_expire_date",
+        "nullable": true,
+        "type": "date"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 0,
+    "foreign_keys": [],
+    "kind": "view",
+    "links_to_drug": true,
+    "primary_key": [],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding; Neo4j projection (Drug-HAS_APPROVAL)",
+    "rows": 16253
+  },
+  "ob_product": {
+    "category": "regulatory",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "ingredient",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "trade_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "applicant",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "strength",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "appl_type",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "appl_no",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "te_code",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "approval_date",
+        "nullable": true,
+        "type": "date"
+      },
+      {
+        "name": "rld",
+        "nullable": true,
+        "type": "smallint"
+      },
+      {
+        "name": "type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "applicant_full_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "dose_form",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "route",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "product_no",
+        "nullable": true,
+        "type": "character"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 55242,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding; Neo4j projection (Drug-HAS_APPROVAL)",
+    "rows": 55242
+  },
+  "omop_relationship": {
+    "category": "indications",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "concept_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "relationship_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "concept_name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "umls_cui",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "snomed_full_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "cui_semantic_type",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "snomed_conceptid",
+        "nullable": true,
+        "type": "bigint"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 42515,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query / hybrid RAG; Neo4j projection (Drug-INDICATED_FOR-Disease)",
+    "rows": 42515
+  },
+  "omop_relationship_doid_view": {
+    "category": "indications",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "concept_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "relationship_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "concept_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "umls_cui",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "snomed_full_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "cui_semantic_type",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "snomed_conceptid",
+        "nullable": true,
+        "type": "bigint"
+      },
+      {
+        "name": "doid",
+        "nullable": true,
+        "type": "text"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 0,
+    "foreign_keys": [],
+    "kind": "view",
+    "links_to_drug": true,
+    "primary_key": [],
+    "retrieval": "PostgreSQL relationship query / hybrid RAG; Neo4j projection (Drug-INDICATED_FOR-Disease)",
+    "rows": 42515
+  },
+  "parentmol": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "cd_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "cas_reg_no",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "inchi",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "nostereo_inchi",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "molfile",
+        "nullable": true,
+        "type": "text"
+      },
+      {
+        "name": "molimg",
+        "nullable": true,
+        "type": "bytea"
+      },
+      {
+        "name": "smiles",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "inchikey",
+        "nullable": true,
+        "type": "character"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 225,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "cd_id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 225
+  },
+  "pdb": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "pdb",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "chain_id",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "accession",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "title",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "pubmed_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "exp_method",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "deposition_date",
+        "nullable": true,
+        "type": "date"
+      },
+      {
+        "name": "ligand_id",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 5576,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 5576
+  },
+  "pharma_class": {
+    "category": "products_labels",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "type",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "class_code",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "source",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 33079,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Section-aware hybrid RAG for long label text; direct lookup for product identity",
+    "rows": 33079
+  },
+  "pk_az": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "type",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "value",
+        "nullable": false,
+        "type": "double precision"
+      },
+      {
+        "name": "unit",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "description",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "similarity",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "confidence",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 43099,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "struct_id",
+      "type"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 43099
+  },
+  "pka": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "pka_level",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "value",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "pka_type",
+        "nullable": false,
+        "type": "character"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 8863,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 8863
+  },
+  "prd2label": {
+    "category": "products_labels",
+    "columns": [
+      {
+        "name": "ndc_product_code",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "label_id",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "label_database"
+    ],
+    "estimated_rows": 150099,
+    "foreign_keys": [
+      {
+        "columns": [
+          "label_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "label"
+      },
+      {
+        "columns": [
+          "ndc_product_code"
+        ],
+        "referenced_columns": [
+          "ndc_product_code"
+        ],
+        "references": "product"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "ndc_product_code",
+      "label_id"
+    ],
+    "retrieval": "Section-aware hybrid RAG for long label text; direct lookup for product identity",
+    "rows": 150099
+  },
+  "product": {
+    "category": "products_labels",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "ndc_product_code",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "form",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "generic_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "product_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "route",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "marketing_status",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "active_ingredient_count",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence",
+      "label_database"
+    ],
+    "estimated_rows": 150099,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Section-aware hybrid RAG for long label text; direct lookup for product identity",
+    "rows": 150099
+  },
+  "property": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "property_type_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "property_type_symbol",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "value",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "reference_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "reference_type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "source",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 9603,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      },
+      {
+        "columns": [
+          "property_type_symbol"
+        ],
+        "referenced_columns": [
+          "symbol"
+        ],
+        "references": "property_type"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 9603
+  },
+  "property_type": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "category",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "symbol",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "units",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 9,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 9
+  },
+  "protein_type": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "type",
+        "nullable": false,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 5,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 5
+  },
+  "rdkit_build_meta": {
+    "category": "provenance",
+    "columns": [
+      {
+        "name": "field",
+        "nullable": false,
+        "type": "text"
+      },
+      {
+        "name": "value",
+        "nullable": false,
+        "type": "text"
+      },
+      {
+        "name": "description",
+        "nullable": false,
+        "type": "text"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 3,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "field"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding",
+    "rows": 3
+  },
+  "ref_type": {
+    "category": "provenance",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "type",
+        "nullable": false,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 6,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding",
+    "rows": 6
+  },
+  "reference": {
+    "category": "provenance",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "pmid",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "doi",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "document_id",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "authors",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "title",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "isbn10",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "url",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "journal",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "volume",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "issue",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "dp_year",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "pages",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 1378,
+    "foreign_keys": [
+      {
+        "columns": [
+          "type"
+        ],
+        "referenced_columns": [
+          "type"
+        ],
+        "references": "ref_type"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding",
+    "rows": 1378
+  },
+  "section": {
+    "category": "products_labels",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "text",
+        "nullable": true,
+        "type": "text"
+      },
+      {
+        "name": "label_id",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "code",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "title",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "label_database"
+    ],
+    "estimated_rows": 1919716,
+    "foreign_keys": [
+      {
+        "columns": [
+          "label_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "label"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Section-aware hybrid RAG for long label text; direct lookup for product identity",
+    "rows": 1917407
+  },
+  "struct2atc": {
+    "category": "atc_ddd",
+    "columns": [
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "atc_code",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 5430,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      },
+      {
+        "columns": [
+          "atc_code"
+        ],
+        "referenced_columns": [
+          "code"
+        ],
+        "references": "atc"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "struct_id",
+      "atc_code"
+    ],
+    "retrieval": "Direct PostgreSQL lookup; Neo4j projection (Drug-HAS_ATC-ATC)",
+    "rows": 5430
+  },
+  "struct2drgclass": {
+    "category": "interactions",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "drug_class_id",
+        "nullable": false,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 4560,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      },
+      {
+        "columns": [
+          "drug_class_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "drug_class"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (DrugClass-INTERACTS_WITH-DrugClass)",
+    "rows": 4560
+  },
+  "struct2obprod": {
+    "category": "regulatory",
+    "columns": [
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "prod_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "strength",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 77694,
+    "foreign_keys": [
+      {
+        "columns": [
+          "prod_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "ob_product"
+      },
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "struct_id",
+      "prod_id"
+    ],
+    "retrieval": "Direct PostgreSQL lookup and evidence binding; Neo4j projection (Drug-HAS_APPROVAL)",
+    "rows": 77694
+  },
+  "struct2parent": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "struct_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "parent_id",
+        "nullable": false,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 361,
+    "foreign_keys": [
+      {
+        "columns": [
+          "parent_id"
+        ],
+        "referenced_columns": [
+          "cd_id"
+        ],
+        "references": "parentmol"
+      },
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "struct_id",
+      "parent_id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 361
+  },
+  "struct_type_def": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "description",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 23,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 23
+  },
+  "structure_type": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "type",
+        "nullable": false,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 5193,
+    "foreign_keys": [
+      {
+        "columns": [
+          "type"
+        ],
+        "referenced_columns": [
+          "type"
+        ],
+        "references": "struct_type_def"
+      },
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 5193
+  },
+  "structures": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "cd_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "cd_formula",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "cd_molweight",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "clogp",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "alogs",
+        "nullable": true,
+        "type": "double precision"
+      },
+      {
+        "name": "cas_reg_no",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "tpsa",
+        "nullable": true,
+        "type": "real"
+      },
+      {
+        "name": "lipinski",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "no_formulations",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "stem",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "molfile",
+        "nullable": true,
+        "type": "text"
+      },
+      {
+        "name": "mrdef",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "enhanced_stereo",
+        "nullable": false,
+        "type": "boolean"
+      },
+      {
+        "name": "arom_c",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "sp3_c",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "sp2_c",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "sp_c",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "halogen",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "hetero_sp2_c",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "rotb",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "molimg",
+        "nullable": true,
+        "type": "bytea"
+      },
+      {
+        "name": "o_n",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "oh_nh",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "inchi",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "smiles",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "rgb",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "fda_labels",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "inchikey",
+        "nullable": true,
+        "type": "character"
+      },
+      {
+        "name": "status",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "m",
+        "nullable": true,
+        "type": "mol"
+      },
+      {
+        "name": "mfp2",
+        "nullable": true,
+        "type": "bfp"
+      },
+      {
+        "name": "tsv",
+        "nullable": true,
+        "type": "tsvector"
+      },
+      {
+        "name": "tsv_fda",
+        "nullable": true,
+        "type": "tsvector"
+      },
+      {
+        "name": "tsv_ema",
+        "nullable": true,
+        "type": "tsvector"
+      },
+      {
+        "name": "tsv_pmda",
+        "nullable": true,
+        "type": "tsvector"
+      },
+      {
+        "name": "cansmi",
+        "nullable": true,
+        "type": "text"
+      },
+      {
+        "name": "fp",
+        "nullable": true,
+        "type": "bfp"
+      },
+      {
+        "name": "torsionbv",
+        "nullable": true,
+        "type": "bfp"
+      },
+      {
+        "name": "ffp",
+        "nullable": true,
+        "type": "bfp"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence",
+      "relations_sqlite"
+    ],
+    "estimated_rows": 5116,
+    "foreign_keys": [
+      {
+        "columns": [
+          "stem"
+        ],
+        "referenced_columns": [
+          "stem"
+        ],
+        "references": "inn_stem"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "cd_id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 5116
+  },
+  "synonyms": {
+    "category": "structures_chemistry",
+    "columns": [
+      {
+        "name": "syn_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "preferred_name",
+        "nullable": true,
+        "type": "smallint"
+      },
+      {
+        "name": "parent_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "lname",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence"
+    ],
+    "estimated_rows": 23875,
+    "foreign_keys": [
+      {
+        "columns": [
+          "parent_id"
+        ],
+        "referenced_columns": [
+          "cd_id"
+        ],
+        "references": "parentmol"
+      },
+      {
+        "columns": [
+          "id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "syn_id"
+    ],
+    "retrieval": "Direct PostgreSQL query for exact values (formula, weight, identifiers, aliases)",
+    "rows": 23875
+  },
+  "target_class": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "l1",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 39,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "l1"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 39
+  },
+  "target_component": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "accession",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "swissprot",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "organism",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "gene",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "geneid",
+        "nullable": true,
+        "type": "bigint"
+      },
+      {
+        "name": "tdl",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 22691,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 22691
+  },
+  "target_dictionary": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "name",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "target_class",
+        "nullable": false,
+        "type": "character varying"
+      },
+      {
+        "name": "protein_components",
+        "nullable": false,
+        "type": "smallint"
+      },
+      {
+        "name": "protein_type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "tdl",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "vector_evidence",
+      "relations_sqlite"
+    ],
+    "estimated_rows": 3608,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 3608
+  },
+  "target_go": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "term",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "type",
+        "nullable": true,
+        "type": "character"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 20051,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 20051
+  },
+  "target_keyword": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "descr",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "category",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "keyword",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 1187,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 1187
+  },
+  "td2tc": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "target_id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "component_id",
+        "nullable": false,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 4292,
+    "foreign_keys": [
+      {
+        "columns": [
+          "target_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "target_dictionary"
+      },
+      {
+        "columns": [
+          "component_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "target_component"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "target_id",
+      "component_id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 4292
+  },
+  "tdgo2tc": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "go_id",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "component_id",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 344995,
+    "foreign_keys": [
+      {
+        "columns": [
+          "go_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "target_go"
+      },
+      {
+        "columns": [
+          "component_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "target_component"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 344995
+  },
+  "tdkey2tc": {
+    "category": "targets",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "tdkey_id",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "component_id",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 259228,
+    "foreign_keys": [
+      {
+        "columns": [
+          "tdkey_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "target_keyword"
+      },
+      {
+        "columns": [
+          "component_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "target_component"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "id"
+    ],
+    "retrieval": "PostgreSQL relationship query; Neo4j projection (Drug-TARGETS-Target-ENCODED_BY-Gene)",
+    "rows": 259228
+  },
+  "vetomop": {
+    "category": "veterinary",
+    "columns": [
+      {
+        "name": "omopid",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "species",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "relationship_type",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "concept_name",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 2581,
+    "foreign_keys": [
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [
+      "omopid"
+    ],
+    "retrieval": "Direct PostgreSQL lookup; keep separate from human indications and interactions",
+    "rows": 2581
+  },
+  "vetprod": {
+    "category": "veterinary",
+    "columns": [
+      {
+        "name": "prodid",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "appl_type",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "appl_no",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "trade_name",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "applicant",
+        "nullable": true,
+        "type": "character varying"
+      },
+      {
+        "name": "active_ingredients_count",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 1636,
+    "foreign_keys": [
+      {
+        "columns": [
+          "appl_type"
+        ],
+        "referenced_columns": [
+          "appl_type"
+        ],
+        "references": "vetprod_type"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "prodid"
+    ],
+    "retrieval": "Direct PostgreSQL lookup; keep separate from human indications and interactions",
+    "rows": 1636
+  },
+  "vetprod2struct": {
+    "category": "veterinary",
+    "columns": [
+      {
+        "name": "prodid",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "struct_id",
+        "nullable": true,
+        "type": "integer"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 2244,
+    "foreign_keys": [
+      {
+        "columns": [
+          "prodid"
+        ],
+        "referenced_columns": [
+          "prodid"
+        ],
+        "references": "vetprod"
+      },
+      {
+        "columns": [
+          "struct_id"
+        ],
+        "referenced_columns": [
+          "id"
+        ],
+        "references": "structures"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": true,
+    "primary_key": [],
+    "retrieval": "Direct PostgreSQL lookup; keep separate from human indications and interactions",
+    "rows": 2244
+  },
+  "vetprod_type": {
+    "category": "veterinary",
+    "columns": [
+      {
+        "name": "id",
+        "nullable": false,
+        "type": "integer"
+      },
+      {
+        "name": "appl_type",
+        "nullable": false,
+        "type": "character"
+      },
+      {
+        "name": "description",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 3,
+    "foreign_keys": [],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [
+      "appl_type"
+    ],
+    "retrieval": "Direct PostgreSQL lookup; keep separate from human indications and interactions",
+    "rows": 3
+  },
+  "vettype": {
+    "category": "veterinary",
+    "columns": [
+      {
+        "name": "prodid",
+        "nullable": true,
+        "type": "integer"
+      },
+      {
+        "name": "type",
+        "nullable": true,
+        "type": "character varying"
+      }
+    ],
+    "derived_into": [
+      "full_coverage"
+    ],
+    "estimated_rows": 1717,
+    "foreign_keys": [
+      {
+        "columns": [
+          "prodid"
+        ],
+        "referenced_columns": [
+          "prodid"
+        ],
+        "references": "vetprod"
+      }
+    ],
+    "kind": "table",
+    "links_to_drug": false,
+    "primary_key": [],
+    "retrieval": "Direct PostgreSQL lookup; keep separate from human indications and interactions",
+    "rows": 1717
+  }
+}
