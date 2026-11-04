@@ -1,0 +1,66 @@
+{
+  "common_side_effects": {
+    "fields": [
+      {"source": "label", "section": "adverse_reactions", "role": "primary"},
+      {"source": "label", "section": "warnings", "role": "primary"},
+      {"source": "vector", "section": "adverse_events", "role": "secondary",
+       "terms": ["adverse", "events", "faers", "side", "effects", "reactions", "reports", "cases", "llr"],
+       "limitation": "Only FAERS spontaneous adverse-event reports were found for this drug. FAERS counts reports, not patients, so it cannot establish how common a side effect is, and a report does not prove the drug caused the event."}
+    ]
+  },
+  "serious_or_boxed_warnings": {
+    "fields": [
+      {"source": "label", "section": "warnings", "role": "primary"},
+      {"source": "label", "section": "contraindications", "role": "primary"},
+      {"source": "vector", "section": "contraindications", "role": "secondary",
+       "terms": ["contraindication", "contraindications", "contraindicated", "warning", "warnings", "precautions", "risk"],
+       "limitation": "Only DrugCentral structured contraindication records were found; no product-label warnings section was available. Boxed-warning text appears in label warnings sections, not in the structured snapshot."}
+    ]
+  },
+  "adverse_event_reports": {
+    "fields": [
+      {"source": "vector", "section": "adverse_events", "role": "primary",
+       "terms": ["adverse", "events", "faers", "reports", "cases", "llr"]}
+    ]
+  },
+  "interactions": {
+    "fields": [
+      {"source": "vector", "section": "interactions", "role": "primary",
+       "terms": ["interaction", "interactions", "interact", "coadministration", "drug-drug"]}
+    ]
+  },
+  "contraindications": {
+    "fields": [
+      {"source": "vector", "section": "contraindications", "role": "primary",
+       "terms": ["contraindication", "contraindications", "contraindicated"]}
+    ]
+  },
+  "dosing": {
+    "fields": [
+      {"source": "label", "section": "dosage", "role": "primary"},
+      {"source": "vector", "section": "properties", "role": "secondary",
+       "terms": ["dose", "dosage", "dosing", "mg", "strength"],
+       "limitation": "No product-label dosage section was found for this drug; the DrugCentral structured snapshot carries only summary dose values, not full dosing instructions."}
+    ]
+  },
+  "indications": {
+    "fields": [
+      {"source": "vector", "section": "indications", "role": "primary",
+       "terms": ["indication", "indications", "used", "use", "treat", "treats", "treatment", "off-label", "uses"]}
+    ]
+  },
+  "pregnancy_lactation": {
+    "fields": [
+      {"source": "label", "section": "populations", "role": "primary"},
+      {"source": "label", "section": "warnings", "role": "secondary"}
+    ]
+  },
+  "mechanism": {
+    "fields": [
+      {"source": "vector", "section": "pharmacology", "role": "primary",
+       "terms": ["mechanism", "action", "pharmacologic", "pharmacology", "class", "inhibitor", "agonist", "moa"]},
+      {"source": "vector", "section": "targets", "role": "secondary",
+       "terms": ["target", "targets", "receptor", "protein", "gene", "binding"]}
+    ]
+  }
+}
