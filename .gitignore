@@ -1,0 +1,48 @@
+# Secrets and deployment state (examples are tracked: env.example, collection.env.example)
+.env
+*.env.local
+environments/ec2/.env
+environments/ec2/collection.env
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# Data: databases, dumps, restore bundles, image archives (see data/README.md)
+data/*
+!data/README.md
+bundle/
+source-bundle/
+collection-bundle/
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.building.sqlite
+*.dump
+*.sql.gz
+*.tar.gz
+
+# Generated results and runtime output (see benchmarks/README.md, evaluation/DATASETS.md)
+benchmarks/*
+!benchmarks/README.md
+logs/
+*.log
+*.jsonl
+evaluation/*/questions.json
+evaluation/*/baseline-*.json
+
+# Python, editors, OS
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.idea/
+.vscode/
+.DS_Store
+*.partial
+*.tmp
+*~
