@@ -49,8 +49,7 @@ def backend(kind, variable):
     if not value:
         raise ValueError(f'Set {variable} (ollama or bedrock) or RAG_PIPELINE; {EXAMPLES}')
     if value not in BACKENDS:
-        raise ValueError(f'{variable}={value!r} is not supported; use ollama or bedrock '
-                         '(MedCPT, Titan and other backends are not part of this repository)')
+        raise ValueError(f'{variable}={value!r} is not supported; use ollama or bedrock')
     if default and value != default:
         raise ValueError(f'{variable}={value!r} conflicts with RAG_PIPELINE={selected!r}, which requires {default}')
     return value
