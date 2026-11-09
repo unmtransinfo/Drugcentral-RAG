@@ -46,7 +46,7 @@ class ModeSelectionTests(Env):
     def test_local_mode_defaults_to_ollama(self):
         os.environ['RAG_PIPELINE'] = 'local'
         self.assertEqual((chat_backend(), embedding_backend(), backend_name()), ('ollama', 'ollama', 'pgvector'))
-        self.assertEqual((chat_model_id(), embedding_model_id()), ('qwen2.5:14b', 'nomic-embed-text'))
+        self.assertEqual((chat_model_id(), embedding_model_id()), ('qwen3.5:9b', 'nomic-embed-text'))
 
     def test_bedrock_mode_defaults_to_bedrock(self):
         os.environ.update(BEDROCK)
@@ -62,9 +62,9 @@ class ModeSelectionTests(Env):
 
     def test_unsupported_values_are_rejected(self):
         cases = [({'RAG_PIPELINE': 'legacy'}, pipeline, "RAG_PIPELINE='legacy' is not supported"),
-                 ({'EMBED_BACKEND': 'medcpt'}, embedding_backend, "EMBED_BACKEND='medcpt' is not supported"),
-                 ({'EMBED_BACKEND': 'titan'}, embedding_backend, "EMBED_BACKEND='titan' is not supported"),
-                 ({'VECTOR_BACKEND': 'chroma'}, backend_name, "VECTOR_BACKEND='chroma' is not supported")]
+                 ({'EMBED_BACKEND': 'other'}, embedding_backend, "EMBED_BACKEND='other' is not supported"),
+                 ({'CHAT_BACKEND': 'other'}, chat_backend, "CHAT_BACKEND='other' is not supported"),
+                 ({'VECTOR_BACKEND': 'other'}, backend_name, "VECTOR_BACKEND='other' is not supported")]
         for env, check, message in cases:
             with self.subTest(env=env), patch.dict(os.environ, env):
                 with self.assertRaisesRegex(ValueError, message):
