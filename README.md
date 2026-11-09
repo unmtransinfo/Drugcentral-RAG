@@ -1,4 +1,4 @@
-# drugcentral-rag
+# Drugcentral-RAG
 
 Question answering over [DrugCentral](https://drugcentral.org) with cited answers. A FastAPI service retrieves
 evidence from PostgreSQL/pgvector and generates answers that are checked against that evidence before they are
@@ -80,7 +80,7 @@ The default URL is http://127.0.0.1:8000 (or `DRUGCENTRAL_API_URL`). Exit status
 |---|---|---|---|
 | `OLLAMA_EMBED_MODEL` / `BEDROCK_EMBED_MODEL` (+ `BEDROCK_EMBED_DIMENSIONS`) | `nomic-embed-text` (768) | `us.cohere.embed-v4:0` (1024) | Query and document embeddings |
 | `BEDROCK_RERANK_MODEL` | — | `cohere.rerank-v3-5:0` (`us-west-2`) | Rerank retrieved evidence |
-| `OLLAMA_CHAT_MODEL` / `BEDROCK_GENERATION_MODEL` | `qwen2.5:14b` | `qwen.qwen3-next-80b-a3b` | Answer generation |
+| `OLLAMA_CHAT_MODEL` / `BEDROCK_GENERATION_MODEL` | `qwen3.5:9b` | `qwen.qwen3-next-80b-a3b` | Answer generation |
 | `BEDROCK_VALIDATION_MODEL` | — (local mode checks answers with the same chat model) | same as generation | Claim validation |
 | `python -m evaluation.judge_verified --model …` | — | `us.amazon.nova-lite-v1:0` | Benchmark judge (evaluation only) |
 
@@ -119,8 +119,7 @@ python -m unittest discover -s tests -t .     # in each Conda environment; no ne
 Run it once per dependency group: tests that need only the other group's packages are skipped. The Bedrock request
 tests are mocked: they check request formats against stub clients and make no Bedrock calls.
 `tests/integration/run.sh` is a separate, opt-in smoke test of local mode on synthetic data
-([tests/integration/README.md](tests/integration/README.md)); its `qwen2.5:3b` default is not the application's
-`qwen2.5:14b` default. What the unit tests, the small local integration test and the Bedrock benchmark each do and do not establish is
+([tests/integration/README.md](tests/integration/README.md)). What the unit tests, the small local integration test and the Bedrock benchmark each do and do not establish is
 listed in [docs/LOCAL_DEVELOPMENT.md](docs/LOCAL_DEVELOPMENT.md#what-has-been-tested).
 
 ## Evaluation
@@ -132,8 +131,7 @@ benchmark. `evaluation.verified_benchmark` + `evaluation.judge_verified` reprodu
 ## Not included
 
 Secrets (`.env`), DrugCentral-derived data (SQLite files, dumps, restore bundles, question sets), benchmark results,
-logs and Docker image archives. Also not part of this repository: the earlier Streamlit UI, the MedCPT and Titan
-embedding backends, Chroma, local/Colab evaluation judges, a non-Docker systemd deployment and an AWS VPC migration job.
+logs and Docker image archives.
 
 ## License
 
