@@ -13,7 +13,7 @@ quality evaluation (see [What has been tested](LOCAL_DEVELOPMENT.md#what-has-bee
 | pgvector image | `pgvector/pgvector:pg17` (`sha256:ac08538c…a75d`), extension `vector` 0.8.7 |
 | Python environment | `python:3.11-slim-trixie` (Python 3.11.18) + `environments/local/requirements-local.lock` (installed set identical to the lock; no `boto3`) |
 | Embedding model | `nomic-embed-text:latest` (Ollama ID `0a109f422b47`), 768 dimensions |
-| Chat model | `qwen2.5:3b` (Ollama ID `357c53fb659c`), **not** the default `qwen2.5:14b`: the host had about 8 GB free alongside other services and the Ollama container was limited to 4 GB |
+| Chat model | A 3B chat model (Ollama ID `357c53fb659c`), **not** the application default `qwen3.5:9b` or the current smoke-test default `qwen3.5:2b`: the host had about 8 GB free alongside other services and the Ollama container was limited to 4 GB |
 
 ## Isolation and data
 
@@ -31,9 +31,9 @@ quality evaluation (see [What has been tested](LOCAL_DEVELOPMENT.md#what-has-bee
 ```bash
 C="docker compose -p dc-itest -f environments/local/docker-compose.yml --env-file compose.env"
 $C --profile ollama up -d db ollama
-$C exec -T ollama ollama pull nomic-embed-text && $C exec -T ollama ollama pull qwen2.5:3b
+$C exec -T ollama ollama pull nomic-embed-text && $C exec -T ollama ollama pull <chat model>
 docker network create --internal dc-itest-internal      # db, ollama and a synthetic source DB attached to it
-# In the local-lock environment on that network (RAG_PIPELINE=local, OLLAMA_CHAT_MODEL=qwen2.5:3b, API_AUTH_TOKEN set):
+# In the local-lock environment on that network (RAG_PIPELINE=local, OLLAMA_CHAT_MODEL=<chat model>, API_AUTH_TOKEN set):
 python -c "from chatbot.embedding_config import create_embeddings; print(len(create_embeddings().embed_query('x')))"
 python -m ingestion.vectors
 python -m uvicorn api:app --host 0.0.0.0 --port 8000    # inside its container; no host port published
@@ -66,14 +66,14 @@ The API was reached over the internal network rather than `localhost`, because p
 
 ## Not established
 
-The default chat model `qwen2.5:14b`; amd64; native (non-Docker) Ollama; ingestion from the real DrugCentral
+The application default `qwen3.5:9b`; the smoke-test default `qwen3.5:2b`; amd64; native (non-Docker) Ollama; ingestion from the real DrugCentral
 database; answer quality; latency on other hardware.
 
 ## Later runs: `tests/integration/run.sh` (2026-11-04)
 
 The fixture used above is now included as `tests/integration/source-fixture.sql`, with the harness described in
 [tests/integration/README.md](../tests/integration/README.md). Same host, images and models as above (Docker
-Compose 5.6.0, `qwen2.5:3b`, `nomic-embed-text`), unique Compose project per run, API published on `127.0.0.1`.
+Compose 5.6.0, the same 3B chat model, `nomic-embed-text`), unique Compose project per run, API published on `127.0.0.1`.
 
 | Run | Result |
 |---|---|
