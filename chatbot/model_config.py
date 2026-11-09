@@ -13,7 +13,7 @@ def chat_backend():
 
 def chat_model_id():
     if chat_backend() == "ollama":
-        return os.getenv("OLLAMA_CHAT_MODEL", "qwen2.5:14b")
+        return os.getenv("OLLAMA_CHAT_MODEL", "qwen3.5:9b")
     model = os.getenv("BEDROCK_GENERATION_MODEL", "").strip()
     if not model:
         raise ValueError("BEDROCK_GENERATION_MODEL is required")
