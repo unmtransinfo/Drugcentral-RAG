@@ -1,4 +1,4 @@
-"""Alert gate for cron/systemd timers or external monitoring.
+"""Alert gate for scheduled jobs (e.g. cron) or external monitoring.
 
 Checks readiness, 5xx error rate, and chat p95 against limits; exits 1 with a
 human-readable message when any limit is breached. Pair with API_AUTH_TOKEN
