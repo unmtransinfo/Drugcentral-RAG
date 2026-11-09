@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Opt-in local-mode smoke test (RAG_PIPELINE=local) on synthetic data. See tests/integration/README.md.
-#   tests/integration/run.sh                          # chat model qwen2.5:3b, API on 127.0.0.1:18000
-#   ITEST_CHAT_MODEL=qwen2.5:14b ITEST_OLLAMA_MEMORY=14g ITEST_API_PORT=18080 tests/integration/run.sh
+#   tests/integration/run.sh                          # chat model qwen3.5:2b, API on 127.0.0.1:18000
+#   ITEST_CHAT_MODEL=qwen3.5:9b ITEST_OLLAMA_MEMORY=14g ITEST_API_PORT=18080 tests/integration/run.sh
 set -uo pipefail
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 cd "$ROOT"
 export PYTHONDONTWRITEBYTECODE=1
 
-export ITEST_CHAT_MODEL=${ITEST_CHAT_MODEL:-qwen2.5:3b}   # smoke-test default; the application default is qwen2.5:14b
+export ITEST_CHAT_MODEL=${ITEST_CHAT_MODEL:-qwen3.5:2b}   # smoke-test default; the application default is qwen3.5:9b
 export ITEST_API_PORT=${ITEST_API_PORT:-18000}
 export ITEST_OLLAMA_MEMORY=${ITEST_OLLAMA_MEMORY:-4g}
 PROJECT=${ITEST_PROJECT:-dc-itest-$(date +%Y%m%d%H%M%S)-$$}
