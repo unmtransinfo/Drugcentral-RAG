@@ -7,7 +7,7 @@ stamping, readiness, Swagger UI, bearer authentication, chat and the CLI. It run
 ```bash
 tests/integration/run.sh                                   # from any directory; defaults below
 ITEST_API_PORT=18080 tests/integration/run.sh              # another localhost port
-ITEST_CHAT_MODEL=qwen2.5:14b ITEST_OLLAMA_MEMORY=14g tests/integration/run.sh
+ITEST_CHAT_MODEL=qwen3.5:9b ITEST_OLLAMA_MEMORY=14g tests/integration/run.sh
 ```
 
 Exit status: 0 all checks passed, 1 a check failed, 2 refused to start (prerequisite, name or port problem).
@@ -16,20 +16,20 @@ Exit status: 0 all checks passed, 1 a check failed, 2 refused to start (prerequi
 
 | | Chat model | Status |
 |---|---|---|
-| This smoke test (`ITEST_CHAT_MODEL`) | `qwen2.5:3b` (~1.9 GB) | Passed on the platform below |
-| The application (`OLLAMA_CHAT_MODEL` in `ollama.env.example`) | `qwen2.5:14b` (~9 GB) | Not run by this test so far |
+| This smoke test (`ITEST_CHAT_MODEL`) | `qwen3.5:2b` | Not run yet; the recorded passes below used an earlier 3B chat model |
+| The application (`OLLAMA_CHAT_MODEL` in `ollama.env.example`) | `qwen3.5:9b` (~6.6 GB) | Not run by this test so far |
 
 The smoke test defaults to the smaller model so that it fits next to other workloads; a pass shows that the
-components work together, not that `qwen2.5:14b` (or any model) gives good answers. The embedding model is always
+components work together, not that `qwen3.5:9b` (or any model) gives good answers. The embedding model is always
 `nomic-embed-text`, as in the application.
 
 ## Settings
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `ITEST_CHAT_MODEL` | `qwen2.5:3b` | Ollama chat model pulled and used for answers |
+| `ITEST_CHAT_MODEL` | `qwen3.5:2b` | Ollama chat model pulled and used for answers |
 | `ITEST_API_PORT` | `18000` | Host port; the API is published on `127.0.0.1` only. The run stops if the port is in use |
-| `ITEST_OLLAMA_MEMORY` | `4g` | Memory limit of the Ollama container (`qwen2.5:14b` needs about 12–14 GB) |
+| `ITEST_OLLAMA_MEMORY` | `4g` | Memory limit of the Ollama container (`qwen3.5:9b` needs about 12–14 GB) |
 | `ITEST_PROJECT` | `dc-itest-<timestamp>-<pid>` | Compose project name; must start with `dc-itest-` and must not exist yet |
 | `ITEST_KEEP` | `0` | `1` keeps the project for inspection and prints the command that removes it |
 
@@ -62,15 +62,15 @@ Models are therefore downloaded again on every run.
 
 ## Expected runtime
 
-Measured on Linux arm64, 4 vCPU, no GPU, with `qwen2.5:3b`: 3 to 3.5 minutes per run with base images cached
+Measured on Linux arm64, 4 vCPU, no GPU, with a 3B chat model: 3 to 3.5 minutes per run with base images cached
 (model download about 20 s on a fast connection; ingestion of 84 chunks under a minute; one chat answer about 80 s).
 The first run adds the image downloads and the Python image build. Larger chat models and slower CPUs take longer.
 
 ## Tested and untested
 
-Tested: Linux arm64 (AWS Graviton), Docker Compose 5.6.0, Ollama 0.40.14 in Docker, `qwen2.5:3b` +
+Tested: Linux arm64 (AWS Graviton), Docker Compose 5.6.0, Ollama 0.40.14 in Docker, a 3B chat model +
 `nomic-embed-text`, CPU only. Recorded runs: [docs/LOCAL_INTEGRATION_TEST.md](../../docs/LOCAL_INTEGRATION_TEST.md).
 
 Not tested: amd64 (the pinned images support it); macOS or Windows with Docker Desktop; GPUs; Podman or rootless
-Docker; Compose versions other than 5.6.0; `qwen2.5:14b`, `qwen2.5:7b` or any other chat model; a native (non-Docker)
+Docker; Compose versions other than 5.6.0; `qwen3.5:2b`, `qwen3.5:9b`, `qwen3.5:4b` or any other chat model; a native (non-Docker)
 Ollama; the real DrugCentral database; answer quality.
