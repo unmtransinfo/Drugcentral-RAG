@@ -7,7 +7,6 @@ stamping, readiness, Swagger UI, bearer authentication, chat and the CLI. It run
 ```bash
 tests/integration/run.sh                                   # from any directory; defaults below
 ITEST_API_PORT=18080 tests/integration/run.sh              # another localhost port
-ITEST_CHAT_MODEL=qwen3.5:9b ITEST_OLLAMA_MEMORY=14g tests/integration/run.sh
 ```
 
 Exit status: 0 all checks passed, 1 a check failed, 2 refused to start (prerequisite, name or port problem).
@@ -29,7 +28,7 @@ components work together, not that `qwen3.5:9b` (or any model) gives good answer
 |---|---|---|
 | `ITEST_CHAT_MODEL` | `qwen3.5:2b` | Ollama chat model pulled and used for answers |
 | `ITEST_API_PORT` | `18000` | Host port; the API is published on `127.0.0.1` only. The run stops if the port is in use |
-| `ITEST_OLLAMA_MEMORY` | `4g` | Memory limit of the Ollama container (`qwen3.5:9b` needs about 12–14 GB) |
+| `ITEST_OLLAMA_MEMORY` | `4g` | Memory limit of the Ollama container |
 | `ITEST_PROJECT` | `dc-itest-<timestamp>-<pid>` | Compose project name; must start with `dc-itest-` and must not exist yet |
 | `ITEST_KEEP` | `0` | `1` keeps the project for inspection and prints the command that removes it |
 
