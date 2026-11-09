@@ -133,7 +133,5 @@ benchmark. `evaluation.verified_benchmark` + `evaluation.judge_verified` reprodu
 Secrets (`.env`), DrugCentral-derived data (SQLite files, dumps, restore bundles, question sets), benchmark results,
 logs and Docker image archives.
 
-## License
-
-No license has been chosen for this code yet. DrugCentral data is subject to DrugCentral's own terms; obtain it
-from the DrugCentral project.
+## Licence
+DrugCentral-RAG is available under the [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/legalcode). Download and use of this resource evidences your agreement to all the terms and conditions of the license.
