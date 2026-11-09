@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from chatbot.retrieval import EvidenceIndex
 
-# Question templates per category (formerly shared with the removed Colab set builder).
+# Question templates per category.
 HEADERS = {
  'targets': ('Biological Targets', 'Name one biological target recorded for {d}; include its gene symbol if recorded.'),
  'indications': ('Indications', 'Name one indication recorded for {d} in this DrugCentral snapshot.'),
