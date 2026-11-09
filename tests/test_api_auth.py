@@ -88,11 +88,11 @@ class BearerAuthTests(unittest.TestCase):
 
     def test_local_mode_ready_requires_the_ollama_chat_model(self):
         index = SimpleNamespace(ids={"demo": 1}, versions={"test"})
-        tags = MagicMock(**{"json.return_value": {"models": [{"name": "qwen2.5:14b"}]}})
+        tags = MagicMock(**{"json.return_value": {"models": [{"name": "qwen3.5:9b"}]}})
         with patch.object(app.state, "evidence_index", index, create=True), \
                 patch.object(app.state, "chat_backend", "ollama", create=True), \
                 patch("chatbot.storage._connect", MagicMock()), patch("api.httpx.get", return_value=tags):
-            for model, status in [("qwen2.5:14b", 200), ("qwen2.5:7b", 503)]:
+            for model, status in [("qwen3.5:9b", 200), ("qwen3.5:4b", 503)]:
                 with self.subTest(model=model), patch.object(app.state, "chat_model", model, create=True):
                     ready = self.client.get("/api/ready")
                     self.assertEqual(ready.status_code, status)
