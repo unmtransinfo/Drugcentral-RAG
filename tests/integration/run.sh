@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Opt-in local-mode smoke test (RAG_PIPELINE=local) on synthetic data. See tests/integration/README.md.
 #   tests/integration/run.sh                          # chat model qwen3.5:2b, API on 127.0.0.1:18000
-#   ITEST_CHAT_MODEL=qwen3.5:9b ITEST_OLLAMA_MEMORY=14g ITEST_API_PORT=18080 tests/integration/run.sh
+#   ITEST_API_PORT=18080 tests/integration/run.sh     # another localhost port
 set -uo pipefail
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 cd "$ROOT"
