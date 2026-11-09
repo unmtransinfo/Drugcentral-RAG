@@ -168,7 +168,7 @@ The opt-in local-mode smoke test runs the whole local stack in Docker on synthet
 
 ```bash
 tests/integration/run.sh                        # chat model qwen3.5:2b, API on 127.0.0.1:18000
-ITEST_CHAT_MODEL=qwen3.5:9b ITEST_OLLAMA_MEMORY=14g ITEST_API_PORT=18080 tests/integration/run.sh
+ITEST_API_PORT=18080 tests/integration/run.sh   # another localhost port
 ```
 
 Its default chat model, `qwen3.5:2b`, is a smoke-test setting; the application default is `qwen3.5:9b`.
