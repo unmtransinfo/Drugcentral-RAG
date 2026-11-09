@@ -5,7 +5,7 @@ This guide runs the FastAPI service on your machine in one of two modes. Both se
 
 | | Local mode (`RAG_PIPELINE=local`) | Bedrock mode (`RAG_PIPELINE=verified-bedrock`) |
 |---|---|---|
-| Models | Ollama: `qwen2.5:14b` (chat), `nomic-embed-text` (embeddings) | Your AWS account: Cohere Embed v4, Cohere Rerank 3.5, Qwen3 Next |
+| Models | Ollama: `qwen3.5:9b` (chat), `nomic-embed-text` (embeddings) | Your AWS account: Cohere Embed v4, Cohere Rerank 3.5, Qwen3 Next |
 | AWS | None: no credentials, no AWS calls, no AWS packages installed | Standard AWS credential chain of your shell; Bedrock usage is billed to you |
 | Conda environment | `drugcentral-rag-local` from `environments/local/environment.yml` (packages: `requirements-local.lock`) | `drugcentral-rag-aws` from `environments/aws/environment.yml` (packages: `requirements-aws.lock`) |
 | Example config | `environments/local/ollama.env.example` | `environments/local/bedrock.env.example` |
@@ -46,7 +46,7 @@ Also required:
 
 | Item | Size |
 |---|---|
-| `qwen2.5:14b` / `qwen2.5:7b` (alternative) | ~9.0 GB / ~4.7 GB |
+| `qwen3.5:9b` / `qwen3.5:4b` (alternative) | ~6.6 GB / ~3.4 GB |
 | `nomic-embed-text` | ~0.3 GB |
 | DrugCentral source database (Compose profile `source`) | ~5.5 GB of data plus the image |
 | Local vector collection (~151,500 chunks × 768 dimensions + text) | ~1–2 GB |
@@ -77,7 +77,7 @@ Local mode, native Ollama:
 
 ```bash
 ollama pull nomic-embed-text
-ollama pull qwen2.5:14b          # or qwen2.5:7b, then set OLLAMA_CHAT_MODEL=qwen2.5:7b in .env
+ollama pull qwen3.5:9b           # or qwen3.5:4b, then set OLLAMA_CHAT_MODEL=qwen3.5:4b in .env
 ```
 
 Or with Docker: `docker compose -f environments/local/docker-compose.yml --env-file .env --profile ollama up -d ollama`
@@ -167,11 +167,11 @@ The opt-in local-mode smoke test runs the whole local stack in Docker on synthet
 8 GB of downloads on the first run) and is not part of the command above:
 
 ```bash
-tests/integration/run.sh                        # chat model qwen2.5:3b, API on 127.0.0.1:18000
-ITEST_CHAT_MODEL=qwen2.5:14b ITEST_OLLAMA_MEMORY=14g ITEST_API_PORT=18080 tests/integration/run.sh
+tests/integration/run.sh                        # chat model qwen3.5:2b, API on 127.0.0.1:18000
+ITEST_CHAT_MODEL=qwen3.5:9b ITEST_OLLAMA_MEMORY=14g ITEST_API_PORT=18080 tests/integration/run.sh
 ```
 
-Its default chat model, `qwen2.5:3b`, is a smoke-test setting; the application default remains `qwen2.5:14b`.
+Its default chat model, `qwen3.5:2b`, is a smoke-test setting; the application default is `qwen3.5:9b`.
 Prerequisites, settings and untested platforms: [tests/integration/README.md](../tests/integration/README.md).
 
 ## What has been tested
@@ -179,7 +179,7 @@ Prerequisites, settings and untested platforms: [tests/integration/README.md](..
 | Check | What it establishes | What it does not establish |
 |---|---|---|
 | Unit tests (`tests/`) | Mode selection, collection identity guards, bearer authentication, CLI behaviour. The Bedrock request tests are **mocked**: they check the request bodies sent to stub embedding, rerank and Converse clients and make no Bedrock calls | That your AWS account, model access, regions or credentials work |
-| Small local integration test (`tests/integration/run.sh`, [record](LOCAL_INTEGRATION_TEST.md); pinned Ollama 0.40.14 image on arm64, `nomic-embed-text`, `qwen2.5:3b`, synthetic 3-drug data, no AWS) | Embedding, ingestion and collection stamping, readiness, `/docs`, bearer authentication and grounded chat answers work together in local mode | **Not full-data ingestion**: the ~151,500 DrugCentral chunks were not embedded with Ollama (about two days on CPU, see step 4). **Not a quality evaluation**: local-mode answer quality has not been measured. The default chat model `qwen2.5:14b` and amd64 were not run |
+| Small local integration test (`tests/integration/run.sh`, [record](LOCAL_INTEGRATION_TEST.md); pinned Ollama 0.40.14 image on arm64, `nomic-embed-text`, a 3B chat model, synthetic 3-drug data, no AWS) | Embedding, ingestion and collection stamping, readiness, `/docs`, bearer authentication and grounded chat answers work together in local mode | **Not full-data ingestion**: the ~151,500 DrugCentral chunks were not embedded with Ollama (about two days on CPU, see step 4). **Not a quality evaluation**: local-mode answer quality has not been measured. The application default `qwen3.5:9b`, the smoke-test default `qwen3.5:2b` and amd64 were not run |
 | Verified benchmark (`evaluation/DATASETS.md`) | Answer quality of Bedrock mode on the full-coverage collections, for the frozen question set | Anything about local mode; clinical safety; behaviour under load |
 
 ## Troubleshooting
