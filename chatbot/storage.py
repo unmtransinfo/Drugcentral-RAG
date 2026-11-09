@@ -14,8 +14,7 @@ from chatbot.embedding_config import embedding_backend
 def backend_name():
     name = os.getenv("VECTOR_BACKEND", "pgvector").strip().lower()
     if name != "pgvector":
-        raise ValueError(f"VECTOR_BACKEND={name!r} is not supported; only pgvector is available "
-                         "(Chroma is not part of this repository)")
+        raise ValueError(f"VECTOR_BACKEND={name!r} is not supported; only pgvector is available")
     return name
 
 
