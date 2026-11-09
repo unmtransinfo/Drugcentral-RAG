@@ -133,5 +133,10 @@ benchmark. `evaluation.verified_benchmark` + `evaluation.judge_verified` reprodu
 Secrets (`.env`), DrugCentral-derived data (SQLite files, dumps, restore bundles, question sets), benchmark results,
 logs and Docker image archives.
 
+## Maintainer
+
+Developed and maintained by **Bivek Sharma Panthi**. For issues or questions, email
+[bsharmapanthi@salud.unm.edu](mailto:bsharmapanthi@salud.unm.edu).
+
 ## Licence
 DrugCentral-RAG is available under the [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/legalcode). Download and use of this resource evidences your agreement to all the terms and conditions of the license.
