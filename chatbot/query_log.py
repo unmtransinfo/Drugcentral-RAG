@@ -8,8 +8,11 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
+from threading import Lock
 
 from chatbot.failure_reasons import categorize
+
+_write_lock = Lock()  # concurrent requests must not interleave JSONL lines
 
 VERIFIED_ROUTES = {'vector-rag', 'direct', 'direct-reverse', 'direct-indications',
                    'direct-comparison', 'direct-label', 'graph'}
@@ -49,7 +52,8 @@ def log_query(record):
     try:
         target = Path(path)
         target.parent.mkdir(parents=True, exist_ok=True)
-        with target.open('a') as handle:
-            handle.write(json.dumps(record, default=str) + '\n')
+        line = json.dumps(record, default=str) + '\n'
+        with _write_lock, target.open('a') as handle:
+            handle.write(line)
     except OSError:
         pass  # Logging must never break a request.
