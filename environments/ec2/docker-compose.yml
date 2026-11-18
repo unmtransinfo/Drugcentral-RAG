@@ -47,6 +47,10 @@ services:
       SESSION_BACKEND: memory
       EVIDENCE_AUDIT_PATH: /app/logs/evidence-audit.jsonl
       API_AUTH_TOKEN: ${API_AUTH_TOKEN:?set in environments/ec2/.env}
+      # Load-tested 2026-11-18: 100 simultaneous questions, 100% answered, no Bedrock throttling.
+      API_MAX_CONCURRENT: ${API_MAX_CONCURRENT:-32}         # parallel Bedrock-backed answers
+      API_QUEUE_WAIT_SECONDS: ${API_QUEUE_WAIT_SECONDS:-20} # bursts queue briefly instead of 503
+      PG_POOL_SIZE: ${PG_POOL_SIZE:-40}                     # > API_MAX_CONCURRENT; Postgres max_connections is 100
       RAG_MULTIPART: ${RAG_MULTIPART:-1}
       GRAPH_ENABLED: ${GRAPH_ENABLED:-0}   # 1 only after the graph is loaded and `--profile graph` is up
       NEO4J_URI: bolt://neo4j:7687
