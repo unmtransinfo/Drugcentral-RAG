@@ -20,7 +20,7 @@ def backend_name():
 
 def _connect():
     from chatbot.database_config import connect_database
-    return connect_database()
+    return connect_database(pooled=True)
 
 
 def _collection():
