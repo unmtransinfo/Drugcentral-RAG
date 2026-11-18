@@ -23,10 +23,18 @@ from pydantic import BaseModel, ConfigDict, Field
 load_dotenv()
 logger = logging.getLogger(__name__)
 QUEUE_WAIT_SECONDS = min(30.0, max(0.0, float(os.getenv("API_QUEUE_WAIT_SECONDS", "2"))))
+# Model-backed answers run concurrently: the work is network-bound on Bedrock, so the
+# limit protects Bedrock quotas, the database pool and memory rather than local CPU.
+MAX_CONCURRENT = min(128, max(1, int(os.getenv("API_MAX_CONCURRENT", "16"))))
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Sync endpoints share AnyIO's thread pool (default 40). Keep threads beyond the
+    # inference limit so health probes and direct lookups are never starved.
+    import anyio.to_thread
+    limiter = anyio.to_thread.current_default_thread_limiter()
+    limiter.total_tokens = max(limiter.total_tokens, MAX_CONCURRENT + 24)
     # Load the database once per process, before accepting requests.
     from agent import agent_executor, invoke_english_only, evidence_index
 
@@ -55,8 +63,7 @@ uses Amazon Bedrock with the AWS credentials of the environment running the serv
 """
 
 app = FastAPI(title="DrugCentral RAG API", version="1.0.0", description=API_DESCRIPTION, lifespan=lifespan)
-app.state.inference_lock = Lock()
-app.state.request_slots = BoundedSemaphore(4)
+app.state.request_slots = BoundedSemaphore(MAX_CONCURRENT)
 app.state.sessions = SessionContext()
 # Declare Swagger authentication without rejecting optional auth or changing the
 # existing require_auth/require_evaluation_auth checks and error precedence.
@@ -195,13 +202,10 @@ def chat(payload: ChatRequest, request: Request):
             if answer is not None:
                 logger.info("chat_completed route=direct seconds=%.3f", monotonic() - started)
                 return ChatResponse(answer=answer)
-        # Only model inference joins the bounded queue; exact lookups stay available.
-        lock = request.app.state.inference_lock
+        # Only model inference is bounded; exact lookups stay available. Up to
+        # MAX_CONCURRENT answers run in parallel and later arrivals wait briefly.
         slots = request.app.state.request_slots
-        if not slots.acquire(blocking=False):
-            raise HTTPException(status_code=503, detail="The assistant queue is full.", headers={"Retry-After": "5"})
-        if not lock.acquire(timeout=QUEUE_WAIT_SECONDS):
-            slots.release()
+        if not slots.acquire(timeout=QUEUE_WAIT_SECONDS):
             raise HTTPException(
                 status_code=503,
                 detail="The assistant is busy. Please try again shortly.",
@@ -227,7 +231,6 @@ def chat(payload: ChatRequest, request: Request):
                 detail="The assistant is temporarily unavailable. Please try again later.",
             ) from None
         finally:
-            lock.release()
             slots.release()
     except HTTPException as exc:
         status = exc.status_code
